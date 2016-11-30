@@ -1,0 +1,58 @@
+
+package et.csa.reader;
+
+import et.csa.bean.Dictionary;
+import et.csa.bean.Item;
+import et.csa.bean.Record;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+public class QuestionnaireParser {
+    
+    public static Map<Record,List<List<String>>> parse(Dictionary dictionary, String questionnaire) {
+        Map<Record,List<List<String>>> result = new LinkedHashMap<>();
+        String[] rows = questionnaire.split("(?<!\r)\n");
+        Record record = dictionary.getMainRecord();
+        List<List<String>> valuesList = new LinkedList<>();
+        result.put(record,valuesList);
+        List<String> values = new LinkedList<>();
+        valuesList.add(values);
+        for (Item item : record.getItems()) {
+            parseItem(item, rows[0], values);
+        }
+        for (String row : rows) {
+            record = dictionary.getRecord(row.charAt(0));
+            valuesList = result.get(record);
+            if (valuesList==null) {
+                valuesList = new LinkedList<>();
+                result.put(record,valuesList);
+            }
+            values = new LinkedList<>();
+            valuesList.add(values);
+            for (Item item : record.getItems()) {
+                parseItem(item, row, values);
+            }
+        }
+        return result;
+    }
+    
+    private static void parseItem(Item item, String row, List<String> values) {
+        String v = row.substring(item.getStart()-1,item.getStart()-1+item.getLength());
+        switch (item.getDataType()) {
+            case "Number":
+                if (v.trim().isEmpty()) values.add(null);
+                else values.add(v);
+                break;
+            case "Alpha":
+                if (v.trim().isEmpty()) values.add(null);
+                else values.add("\""+v+"\"");
+                break;
+        }
+        for (Item subItem : item.getSubItems()) {
+            parseItem(subItem, row, values);
+        }
+    }
+    
+}

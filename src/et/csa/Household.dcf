@@ -1,0 +1,1611 @@
+﻿[Dictionary]
+Version=CSPro 6.3
+Label=Household
+Name=HOUSEHOLD_DICT
+RecordTypeStart=1
+RecordTypeLen=1
+Positions=Relative
+ZeroFill=Yes
+DecimalChar=Yes
+
+[Languages]
+ENG=English
+AMH=Amharic
+TIG=Tigrigna
+ORO=Oromifa
+SOM=Somalie
+
+[Level]
+Label=Household questionnaire
+Name=HOUSEHOLD_QUEST
+
+[IdItems]
+
+[Item]
+Label=101 Region|101 ክልል/ከ/አስተዳደር
+Name=ID101
+Start=2
+Len=2
+ZeroFill=Yes
+
+[ValueSet]
+Label=101 Region|101 ክልል/ከ/አስተዳደር
+Name=ID101_VS1
+Link=78107424
+Value=1;Tigray
+Value=2;Afar
+Value=3;Amhara
+Value=4;Oromia
+Value=5;Somalie
+Value=6;Benshangul
+Value=7;SNNP
+Value=12;Gambella
+Value=13;Harari
+Value=14;Diredawa
+Value=15;Addis Ababa
+
+[Item]
+Label=102 Zone|102 ዞን
+Name=ID102
+Start=4
+Len=2
+ZeroFill=Yes
+
+[ValueSet]
+Label=102 Zone|102 ዞን
+Name=ID102_VSR1
+Link=80112152
+Value=1;Region1_zone1
+Value=2;Region1_zone2
+
+[ValueSet]
+Label=102 Zone|102 ዞን
+Name=ID102_VSR2
+Link=80112416
+Value=1;Region2_zone1
+Value=2;Region2_zone2
+
+[Item]
+Label=103 Woreda|103 ወረዳ
+Name=ID103
+Start=6
+Len=2
+ZeroFill=Yes
+
+[Item]
+Label=104 Town/City|104 ከተማ
+Name=ID104
+Start=8
+Len=1
+
+[Item]
+Label=105 Sub City|105 ክ/ከተማ
+Name=ID105
+Start=9
+Len=2
+ZeroFill=Yes
+
+[Item]
+Label=106 Principal  Supervision .Area|106 .ከ/መ .ቦታ
+Name=ID106
+Start=11
+Len=2
+ZeroFill=Yes
+
+[Item]
+Label=107 Supervision Area|107 .የመ/ቆ ቦታ
+Name=ID107
+Start=13
+Len=2
+ZeroFill=Yes
+
+[Item]
+Label=108 Kebele|108 ቀበሌ
+Name=ID108
+Start=15
+Len=3
+ZeroFill=Yes
+
+[Item]
+Label=109 Enumeration Area|109 .የቆጠራ ቦታ
+Name=ID109
+Start=18
+Len=2
+ZeroFill=Yes
+
+[Item]
+Label=202 Housing serial Number|202 የቤት መለያ ተራ ቁጥር
+Name=ID202
+Start=20
+Len=3
+ZeroFill=Yes
+
+[Item]
+Label=203 Households, Hotel/Hostel/Other Collective Quarter Serial Number|203 የቤተሰብ/የሆቴል/ሆስቴል/ የሌላ ጋርዮሽ መኖርያ ተራ ቁጥር
+Name=ID203
+Start=23
+Len=3
+ZeroFill=Yes
+
+[Record]
+Label=Individual
+Name=INDIVIDUAL
+RecordTypeValue='I'
+Required=No
+MaxRecords=150
+RecordLen=165
+
+[Item]
+Label=301 Member Serial  Number|301 የቤተሰብ አባላት
+Name=P301
+Start=26
+Len=2
+
+[Item]
+Label=302 Name of Usual  member and Visitors|302 የቤተሰብ መደበኛ አባላትና የእንግዶች ሙሉ ስም
+Name=P302
+Start=28
+Len=30
+DataType=Alpha
+
+[Item]
+Label=303 Residence Status|303 የነዋሪነት ሁኔታ
+Name=P303
+Start=58
+Len=1
+
+[ValueSet]
+Label=303 Residence Status|303 የነዋሪነት ሁኔታ
+Name=P303_VS1
+Value=1;Usual  resident present  on the Census day|በቆጠራው ቀን ቤት ያደሩ ነዋሪ
+Value=2;Usual resident  absent  on the census day(in Ethiopia )|በቆጠራው ቀን  ቤት ያላደሩ ነዋሪ ኢትዮጽያ ውስጥ
+Value=3;Usual resident absent on the  census day (outside Ethiopia)|በቆጠራው ቀን  ቤት ያላደሩ ነዋሪ ከኢትዮጽያ ውጭ
+Value=4;Visitor  Ethiopian|በቆጠራው ቀን ቤት ያደሩ እንግዳ  ኢትዮጽያዊ
+Value=5;Visitor  non Ethiopian|በቆጠራው ቀን  ቤት ያደሩ እንግዳ የሌላ ሀገር ዞጋ
+
+[Item]
+Label=304A Reagion|304A ክልል
+Name=P304A
+Start=59
+Len=2
+
+[ValueSet]
+Label=304A Reagion
+Name=P304A_VS1
+Link=78107424
+
+[Item]
+Label=304B Zone|304B ዞን
+Name=P304B
+Start=61
+Len=2
+
+[ValueSet]
+Label=304B Zone
+Name=P304B_VS1
+Link=80112152
+
+[ValueSet]
+Label=304B Zone
+Name=P304B_VS2
+Link=80112416
+
+[Item]
+Label=305 Usual country of residence|305 በመደበኛነት የሚኖርበት ሀገር
+Name=P305
+Start=63
+Len=3
+
+[Item]
+Label=306  Relationship|306  306	.ከቤተሰብ ኃላፊው ጋር ያላቸው ዝምድና
+Name=P306
+Start=66
+Len=2
+
+[ValueSet]
+Label=306  Relationship|306  306	.ከቤተሰብ ኃላፊው ጋር ያላቸው ዝምድና
+Name=P306_VS1
+Value=1;Head
+Value=2;Spouse
+Value=3;Partner(cohabiting or living together with head)|እንደ ባልና ሚስት አብረው የሚኖሩ
+Value=4;Daughter of Head and/or Spouse|የኃላፊ እና/ወይም የባለቤት ሴት ልጅ
+Value=5;Son of Head and/or Spouse|የኃላፊ እና/ወይም የባለቤት ወንድ ልጅ
+Value=6;Head/Spouse brother/Sister|የኃላፊ/የባለቤት እህት ወንድም
+Value=7;Parents of head/spouse|የኃላፊ/የባለቤት እናት/አባት
+Value=8;Niece/nephew|የኃላፊ/የባለቤት እህት/ወንድም ልጅ
+Value=9;Grandchild|የኃላፊ/የባለቤት የልጅ ልጅ
+Value=10;Other relative|ሌላ ዘመድ
+Value=11;Non-Relative|ዝምድና የሌላቸው
+Value=12;Domestic employee|የቤት ሰራተኛ
+
+[ValueSet]
+Label=306  Relationship|306  306	.ከቤተሰብ ኃላፊው ጋር ያላቸው ዝምድና
+Name=P306_VS2
+Value=2;Spouse
+Value=3;Partner(cohabiting or living together with head)|እንደ ባልና ሚስት አብረው የሚኖሩ
+Value=4;Daughter of Head and/or Spouse|የኃላፊ እና/ወይም የባለቤት ሴት ልጅ
+Value=5;Son of Head and/or Spouse|የኃላፊ እና/ወይም የባለቤት ወንድ ልጅ
+Value=6;Head/Spouse brother/Sister|የኃላፊ/የባለቤት እህት ወንድም
+Value=7;Parents of head/spouse|የኃላፊ/የባለቤት እናት/አባት
+Value=8;Niece/nephew|የኃላፊ/የባለቤት እህት/ወንድም ልጅ
+Value=9;Grandchild|የኃላፊ/የባለቤት የልጅ ልጅ
+Value=10;Other relative|ሌላ ዘመድ
+Value=11;Non-Relative|ዝምድና የሌላቸው
+Value=12;Domestic employee|የቤት ሰራተኛ
+
+[Item]
+Label=307 Sex|307 ጾታ
+Name=P307
+Start=68
+Len=1
+
+[ValueSet]
+Label=307 Sex|307 ጾታ
+Name=P307_VS1
+Value=1;Male|ወንድ
+Value=2;Female|ሴት
+
+[Item]
+Label=308 Age|308 ዕድሜ
+Name=P308
+Start=69
+Len=2
+
+[ValueSet]
+Label=308 Age|308 ዕድሜ
+Name=P308_VS1
+Value=0:97;Age
+
+[Item]
+Label=309 Mothers line No|309 የእናታቸው የመስመር ቁጥር
+Name=P309
+Start=71
+Len=2
+
+[Item]
+Label=310 Religion|310 ሀይማኖት
+Name=P310
+Start=73
+Len=2
+
+[ValueSet]
+Label=310 Religion|310 ሀይማኖት
+Name=P310_VS1
+Value=1;Orthodox
+Value=2;Protestant
+Value=3;Catholic
+Value=4;Muslim
+Value=5;Wakefena
+Value=6;Jova
+Value=7;Buddist
+Value=8;Bahai
+Value=9;Jew
+Value=10;Traditionalist
+Value=11;No religion
+Value=12;Others
+
+[Item]
+Label=311 Ethnic Group|311 ብሔር ብሔረሰብ
+Name=P311
+Start=75
+Len=2
+
+[Item]
+Label=312 Mother Tongue|312 የአፍ መፍቻ ቋንቋ
+Name=P312
+Start=77
+Len=2
+
+[Item]
+Label=313 Biological mother alive|313 ወላጅ እናት በህይወት አሉ
+Name=P313
+Start=79
+Len=1
+
+[ValueSet]
+Label=313 Biological mother alive|313 ወላጅ እናት በህይወት አሉ
+Name=P313_VS1
+Value=1;Yes
+Value=2;No
+Value=3;Don't know
+
+[Item]
+Label=314 Biological father alive|314 ወላጅ እናት በህይወት አሉ
+Name=P314
+Start=80
+Len=1
+
+[ValueSet]
+Label=314 Biological father alive|314 ወላጅ እናት በህይወት አሉ
+Name=P314_VS1
+Value=1;Yes
+Value=2;No
+Value=3;Don't know
+
+[Item]
+Label=315A   Disablity seeing |315 የአካል ጉዳተኝነት ሁኔታ
+Name=P315A
+Start=81
+Len=1
+
+[ValueSet]
+Label=315A   Disablity SEEING|315 የአካል ጉዳተኝነት ሁኔታ
+Name=P315A_VS1
+Link=77090328
+Value=1;Yes ,I have some difficultiy |አዎ ትንሽ ችግር አለብኝ
+Value=2;Yes , I have a lot of difficulty |አዎ በጣም ችግር አለብኝ
+Value=3;Yes, I can't do at all|አዎ ምንም አላይም/አልሰማም/አልናገርም/አልንቀሳቀስም/አልንከባከብም/ ወዘተ
+Value=4;No, I don't have any difficulity|የለም ምንም ችግር የለብኝም
+
+[Item]
+Label=315B Dsablity hearing
+Name=P315B
+Start=82
+Len=1
+
+[ValueSet]
+Label=315B Dsablity hearing
+Name=P315B_VS1
+Link=77090328
+
+[Item]
+Label=315C  Disablity speaking
+Name=P315C
+Start=83
+Len=1
+
+[ValueSet]
+Label=315C  Disablity speaking
+Name=P315C_VS1
+Link=77090328
+
+[Item]
+Label=315D  Disablity body movement
+Name=P315D
+Start=84
+Len=1
+
+[ValueSet]
+Label=315D  Disablity body movement
+Name=P315D_VS1
+Link=77090328
+
+[Item]
+Label=315E  Disablity self care
+Name=P315E
+Start=85
+Len=1
+
+[ValueSet]
+Label=315E  Disablity self care
+Name=P315E_VS1
+Link=77090328
+
+[Item]
+Label=315F  Disablity mental
+Name=P315F
+Start=86
+Len=1
+
+[ValueSet]
+Label=315F  Disablity mental
+Name=P315F_VS1
+Link=77090328
+
+[Item]
+Label=315G Disablity others
+Name=P315G
+Start=87
+Len=1
+
+[ValueSet]
+Label=315G Disablity others
+Name=P315G_VS1
+Link=77090328
+
+[Item]
+Label=316 Cause of disability|316
+Name=P316
+Start=88
+Len=2
+
+[ValueSet]
+Label=Text From Clipboard|316
+Name=P316_VS1
+Value=1;Car accident |Car accident
+Value=2;Other accident  |Other accident
+Value=3;Polio  |Polio
+Value=4;Hanson disease  |Other disease
+Value=5;Other disease (After delivery)|During pregnancy (At delivery)
+Value=6;During pregnancy (At delivery) |War/mines
+Value=7;War/mines  |Blood Pressure
+Value=8;Others (Not listed in codes 1-7)|Diabetes
+Value=9;Not known|Fistula
+Value=10;Blood Pressure|Others (not listed in codes 1-9)
+Value=88;Diabetes|Don't know
+
+[Item]
+Label=317 Number of years living in current residence|317 እዚህ ያለማቋረጥ ለምን ያህል ጊዜ ኖረዋል
+Name=P317
+Start=90
+Len=2
+
+[ValueSet]
+Label=317 Number of years living in current residence|317 እዚህ ያለማቋረጥ ለምን ያህል ጊዜ ኖረዋል
+Name=P317_VS1
+Value=0;Less than one year|ክ1 አመት በታች
+Value=1;One year|ለ1አመት
+Value=2;Two years|ለ2አመት
+Value=3;Three years|ለ3አመት
+Value=4;Four years|ለ4አመት
+Value=5;Five years|ለ5አመት
+Value=6;Six years|ለ6አመት
+Value=7;Seven  years|ለ7አመት
+Value=8;Eight year|ለ8አመት
+Value=9;Nine years|ለ9አመት
+Value=10;Ten years and over|ለ10 አመትና በላይ
+Value=99;Since birth|ከተወለዱ ጀምሮ
+
+[Item]
+Label=318 Country of birth|318 የትውልድ ሀገር
+Name=P318
+Start=92
+Len=3
+
+[Item]
+Label=319  Birth_region|319  የተወለደበት ክልል
+Name=P319R
+Start=95
+Len=2
+
+[ValueSet]
+Label=319  Birth_region
+Name=P319R_VS1
+Link=78107424
+
+[Item]
+Label=319 Birth_zone|319 የተወለደበት ዞን
+Name=P319Z
+Start=97
+Len=2
+
+[ValueSet]
+Label=319 Birth_zone
+Name=P319Z_VS1
+Link=80112152
+
+[ValueSet]
+Label=319 Birth_zone
+Name=P319Z_VS2
+Link=80112416
+
+[Item]
+Label=320 Residence in october/november 2015|320 ከህዳር 2008 በፊት ይኖርበት የነበረበት ሀገር
+Name=P320
+Start=99
+Len=3
+
+[Item]
+Label=321 Residence region in /nov/dec 2016|321 ይኖሩበት የነበረው  ክልል
+Name=P321R
+Start=102
+Len=2
+
+[ValueSet]
+Label=321 Residence region in /nov/dec 2016
+Name=P321R_VS1
+Link=78107424
+
+[Item]
+Label=321  Residence zone in /nov/dec 2016|321  ይኖሩበት የነበረው  ዞን
+Name=P321Z
+Start=104
+Len=2
+
+[ValueSet]
+Label=321  Residence zone in /nov/dec 2016
+Name=P321Z_VS1
+Link=80112152
+
+[ValueSet]
+Label=321  Residence zone in /nov/dec 2016
+Name=P321Z_VS2
+Link=80112416
+
+[Item]
+Label=322 Rural or urban|322 ከተማ  ወይስ ገጠር
+Name=P322
+Start=106
+Len=1
+
+[ValueSet]
+Label=322 Rural or urban|322 ከተማ  ወይስ ገጠር
+Name=P322_VS1
+Value=1;Urban|ከተማ
+Value=2;Rural|ገጠር
+
+[Item]
+Label=323 Reason for migration|323 የፈለሱበት ምክንያት
+Name=P323
+Start=107
+Len=1
+
+[ValueSet]
+Label=323 Reason for migration|323 የፈለሱበት ምክንያት
+Name=P323_VS1
+Value=1;For work/In search of work|ለስራ/ስራለመፈለግ
+Value=2;for agriculture or settlement|ለእርሻ ወይም ለመኖርያ የሚሆን
+Value=3;to join family member| መሬት ለመፈለግ
+Value=4;Education|በትምህርት ምክንያት
+Value=5;Marriage or start of new family|በጋብቻ ምክንያት
+Value=6;Drought environmental hazard|በድርቅ/በአካባቢ መራቆት ምክንያት
+Value=7;Conflict|በግጭት ምክንያት
+Value=8;Others|ሌላ
+
+[Item]
+Label=324 Current marital status|324 በአሁኑ ወቅት የጋብቻ ሁኔታ
+Name=P324
+Start=108
+Len=1
+
+[ValueSet]
+Label=324 Current marital status|324 በአሁኑ ወቅት የጋብቻ ሁኔታ
+Name=P324_VS1
+Value=1;Never married|አግብተው የማያውቁ
+Value=2;Married|ባለትዳር
+Value=3;Cohabiting/Living Together|እንደባልና ሚስት አብረው የሚኖሩ
+Value=4;Divorced|የተፋቱ
+Value=5;Separated|የተለያዩ
+Value=6;Widowed| የሞተባቸው
+Value=8;Do not know
+
+[Item]
+Label=325 Age at first marriage|325 ሲያገቡ የነበራቸው እድሜ
+Name=P325
+Start=109
+Len=2
+
+[ValueSet]
+Label=325 Age at first marriage|325 ሲያገቡ የነበራቸው እድሜ
+Name=P325_VS1
+Value=0:99;Valid
+
+[Item]
+Label=401 Read and write |401 ማንበብ እና መፃፍ ይችላሉ
+Name=P401
+Start=111
+Len=1
+
+[ValueSet]
+Label=401 Read and write |401 ማንበብ እና መፃፍ ይችላሉ
+Name=P401_VS1
+Value=1;Yes|አዎ
+Value=2;No|የለም
+
+[Item]
+Label=402 Currently attending school|402 በአሁኑ ወቅት ትምህርት ይከታተላሉ
+Name=P402
+Start=112
+Len=2
+
+[Item]
+Label=403 Highest Grade  completed|403 ያጠናቀቁት ከፍተኛ ክፍል
+Name=P403
+Start=114
+Len=2
+
+[Item]
+Label=404 Use a computer|404 ኮምውተር መጠቀም ይችላሉ
+Name=P404
+Start=116
+Len=1
+
+[ValueSet]
+Label=404 Use a computer|404 ኮምውተር መጠቀም ይችላሉ
+Name=P404_VS1
+Value=1;Yes|አዎ
+Value=2;No|የለም
+
+[Item]
+Label=405  Use internet|405  ኢንተርኔት ይጠቀማሉ
+Name=P405
+Start=117
+Len=1
+
+[ValueSet]
+Label=405  Use internet|405  ኢንተርኔት ይጠቀማሉ
+Name=P405_VS1
+Value=1;Yes|አዎ
+Value=2;No|የለም
+
+[Item]
+Label=406 Use cell phone|406 ሞባይል ይጠቀማሉ
+Name=P406
+Start=118
+Len=1
+
+[ValueSet]
+Label=406 Use cell phone|406 ሞባይል ይጠቀማሉ
+Name=P406_VS1
+Value=1;Yes|አዎ
+Value=2;No|የለም
+
+[Item]
+Label=501 Productive activities during the last 7 days
+Name=P501
+Start=119
+Len=1
+ZeroFill=Yes
+
+[ValueSet]
+Label=501 Productive activities during the last 7 days
+Name=P501_VS1
+Value=1;work for pay/ profit|የክፍያ ስራ/ትርፍ የሚያስገኝ ስራ
+Value=2;Work for profit on own/family business|የራስ ስራ/በቤተሰብ የግብርና ስራ
+Value=3;Work on consumption in agrclurure/non agriclture|የራስ ስራ/በቤተሰብ ንግድ ስራ
+Value=4;Has job but not worked|ስራ እያለኝ አልሰራሁም
+Value=5;No|የለም
+
+[Item]
+Label=502 Available to work during the coming month
+Name=P502
+Start=120
+Len=2
+ZeroFill=Yes
+
+[ValueSet]
+Label=502 Available to work during the coming month
+Name=P502_VS1
+Value=1;Yes  available and actively looking for work|ዝግጁ ነኝ ስራም እየፈለኩ ነው
+Value=2;Yes available but not looking for work|ዝግጁ ነኝ ነገር ግን ስር እየፈለኩ አይደለም
+Value=3;Home maker|የቤት ውስጥ ስራ
+Value=4;Pregnancy/delivery|እርግዝና/ወሊድ
+Value=5;Student (full time)|ትምህርት/ስልጠና
+Value=6;Disabled/injury|የአካል ጉዳት
+Value=7;Illness|ህመም
+Value=8;Too young|ልጅ ስለሆንኩ
+Value=9;Old age/ retired|እርጅና
+Value=10;Pensioned|ጡረታ
+Value=11;Remittance|ተቆራጭ
+Value=12;Others|ሌላ
+Value=88;Don't know|አላውቅም
+
+[Item]
+Label=503 Main occupation
+Name=P503
+Start=122
+Len=2
+ZeroFill=Yes
+
+[ValueSet]
+Label=503 Main occupation
+Name=P503_VS1
+Value=1;Managers|ዋና ስራ አስፈፃሚዎች ፕሮፌሽናሎች
+Value=2;Professionals|ቴክኒሺያኖችና ተባባሪ ፕሮፌሽናሎች
+Value=3;Technicians and associate professiona|የፅህፈትና ተመሳሳይ  ሠራተኞች
+Value=4;Clerical support workers
+Value=5;Service and sales workers-05|የአገልግሎት፣ የንግድ እና ተመሳሳይ የሽያጭ ሠራተኞች
+Value=6;Skilled agricultural forestry and fishery workers|የግብርና ደንና ዓሣ ሀብት ዕውቀት ያላቸው (Skilled) ሠራተኞች
+Value=7;Craft and related trades workers|የዕደ ጥበብና ተመሳሳይ  የሽያጭ ሠራተኞች
+Value=8;Plant and machine operators and assemblers|የማምረቻ መሳሪያዎች ኦፐሬተሮች እና  ገጣጣሚዎች
+Value=9;Elementary occupations|ዝቅተኛ የሙያ ደረጃ ያላቸው ሰራተኞች
+Value=10;Defense|የመከላከያ ሠራዊት አባላት
+
+[Item]
+Label=504 Main product/service of the organization
+Name=P504
+Start=124
+Len=2
+ZeroFill=Yes
+
+[ValueSet]
+Label=504 Main product/service of the organization
+Name=P504_VS1
+Value=1;Agriculture/forestry/fishing|ግብርና/አደን
+Value=2;  Manufacturing Mining and quarrying|ማዕድንና ቁፋሮ
+Value=3;Electric gas, air conditioning|የማምረቻ ኢንዱስትሪ
+Value=4;Water supply-sewerage & waste management|ኤሌትሪክ/ጋዝ/እንፋሎት
+Value=5;Construction|የውሀ አቅርቦት
+Value=6;Trade Whole and retail sale|ኮንስትራክሽን
+Value=7;Transport & storage|ጅምላና ችርቻሮ ንግድ
+Value=8;Accommodations Hotel & R|ትራንስፖርት
+Value=9;Information & Comm|የመኝታ ማረፊያና  የምግብ አገልግሎት
+Value=10;Finance and Insurance|ኢንፎርሜሽን ኮሚኒኬሽን
+Value=11;Public dministration/Def|ፋይናንስ/ኢንሹራንሽ አገልግሎት
+Value=12;Education|ሪል ስቴት
+Value=13;Human Health social work|ፕሮፌሽናል ሣይንስ ስራዎች
+Value=14;Other services|የአስተዳደርና ድጋፍ ስራ
+Value=15;Activities of Household as employer|የመንግስት አስተዳደር/መከላከያ
+Value=16;NGO’s & International org|ትምህርት
+Value=88;Do not know|ጤናና ማህበራዊ
+
+[Item]
+Label=505 Employment status
+Name=P505
+Start=126
+Len=2
+ZeroFill=Yes
+
+[ValueSet]
+Label=505 Employment status
+Name=P505_VS1
+Value=1;Employee- Government|ተቀጣሪ ለመንግስት
+Value=2;Employee –Government Deve. Org|ተቀጣሪ ለመንግስት ልማት ድርጅት
+Value=3;Employee -Private organization|ተቀጣሪ ለግል ድርጅት
+Value=4;Employee - NGO/International Org.|ተቀጣሪ መያድ(NGO)/አለም አቀፍ ድርጅት
+Value=5;Employee – Domestic|ተቀጣሪ በግለሰብ ቤት
+Value=6;Employee – others|ተቀጣሪ ሌሎች
+Value=7;Self employed|በግል ስራ የሚተዳደሩ
+Value=8;Unpaid family worker| ሳይከፈላቸው ለቤተሰብ ድርጅት የሚሰሩ
+Value=9;Apprentice|ተለማማጅ
+Value=10;Member of micro enterprise|የህብረት ስራ ማህበርአባል
+Value=11;Member of co-operative
+Value=12;Employer|ቀጣሪ-
+Value=13;Other| ሌሎች
+
+[Item]
+Label=506 Productive activity engaged
+Name=P506
+Start=128
+Len=2
+ZeroFill=Yes
+
+[ValueSet]
+Label=506 Productive activity engaged
+Name=P506_VS1
+Value=1;Work for pay|ተቀጥሮ በክፍያ ገቢ/ትርፍ ለማግኘት መስራት
+Value=2;Work for profit  own/family business|በራስ/በቤተሰብ ግብርና ይዞታ ውስጥ መስራት
+Value=3;Work for own consumption in-agriculture/non agriculture|በራሴ/በቤተሰቤ የንግድ ስራ(ከግብር ውጪ)
+Value=4;Has job but not worked|ስራ እይለኝ አልሰራሁም
+Value=5;Unemployed with work experience|ስራ አጥ/ልምድ ያላቸው
+Value=6;Unemployed without work experience|ስራ አጥ /የስራ ልምድ የሌላቸው
+Value=7;Home making|የቤት ውስጥ ስራ
+Value=8;Pregnancy/Delivery|እርግዝና/በመውለድ
+Value=9;Student(full time)|ትምህርት/ስልጠና ላይ
+Value=10;Disabled/injury|የአካል ጉዳት
+Value=11;Illness|ህመም/አደጋ
+Value=12;Too young|ልጅ ስለሆንኩ
+Value=13;Old age/retire|Old age/retire
+Value=14;Pensioner|ጡረታ
+Value=15;Remittance|ተቆራጭ
+Value=16;Other(specify)|ሌላ
+Value=88;Don't know|አላውቅም
+
+[Item]
+Label=507 Place of Work
+Name=P507
+Start=130
+Len=1
+ZeroFill=Yes
+
+[ValueSet]
+Label=507 Place of Work
+Name=P507_VS1
+Value=1;Home|በቤት ውስጥ
+Value=2;No fixed place|ቋሚ ባልሆነ ቦታ
+Value=3;Fixed place outside home|ቋሚ በሆነ ቦታ ከቤት ውጪ
+
+[Item]
+Label=601 Alive male children ever born
+Name=P601_MALE
+Start=131
+Len=2
+ZeroFill=Yes
+
+[Item]
+Label=601 Alive female children ever born
+Name=P601_FEMALE
+Start=133
+Len=2
+ZeroFill=Yes
+
+[Item]
+Label=601 Alive total number children ever born
+Name=P601_TOTAL
+Start=135
+Len=2
+ZeroFill=Yes
+
+[Item]
+Label=602 Male childrens living with you
+Name=P602_MALE
+Start=137
+Len=2
+ZeroFill=Yes
+
+[Item]
+Label=602 Female childrens living with you
+Name=P602_FEMALE
+Start=139
+Len=2
+ZeroFill=Yes
+
+[Item]
+Label=603 Male childrens living elsewhere
+Name=P603_MALE
+Start=141
+Len=2
+ZeroFill=Yes
+
+[Item]
+Label=603 Female childrens living elsewhere
+Name=P603_FEMALE
+Start=143
+Len=2
+ZeroFill=Yes
+
+[Item]
+Label=604 Male children died
+Name=P604_MALE
+Start=145
+Len=2
+ZeroFill=Yes
+
+[Item]
+Label=604 Female children died
+Name=P604_FEMALE
+Start=147
+Len=2
+ZeroFill=Yes
+
+[Item]
+Label=605 How many alive birth
+Name=P605
+Start=149
+Len=1
+
+[Item]
+Label=606 How many  still alive
+Name=P606
+Start=150
+Len=1
+
+[Item]
+Label=607 Date of birth of last child born alive
+Name=P607_DATE
+Start=151
+Len=8
+ZeroFill=Yes
+
+[Item]
+Label=607 Date
+Name=P607_DD
+Start=151
+Len=2
+ItemType=SubItem
+ZeroFill=Yes
+
+[Item]
+Label=607 Month
+Name=P607_MM
+Start=153
+Len=2
+ItemType=SubItem
+ZeroFill=Yes
+
+[Item]
+Label=607 Year
+Name=P607_YYYY
+Start=155
+Len=4
+ItemType=SubItem
+ZeroFill=Yes
+
+[Item]
+Label=608 Sex of last child born alive
+Name=P608
+Start=159
+Len=2
+ZeroFill=Yes
+
+[ValueSet]
+Label=608 Sex of last child born alive
+Name=P608_VS1
+Value=1;Male|ወንድ
+Value=2;Female|ሴት
+Value=3;Male twins|መንትያ ወንዶች
+Value=4;Female twins|መንትያ ሴቶች
+Value=5;Male/Female twins|ወንድ እና ሴት መንትዮች-
+Value=6;Multiple birth with differnt sex|ሦስት እና ከዚያ በላይ ሆነው የተወለዱ
+Value=88;Don't know|አላውቅም
+
+[Item]
+Label=609 Survival status of last child born
+Name=P609
+Start=161
+Len=2
+ZeroFill=Yes
+
+[ValueSet]
+Label=609 Survival status of last child born
+Name=P609_VS1
+Value=1;Alive|አዎ በህይወት አለ
+Value=2;Dead|ሞቷል
+Value=3;Dead   male twin|ወንዱ መንትያ ሞቷል
+Value=4;Dead   Female  twin|ሴቷ መንትያ ሞታለች
+Value=5;Dead   both twins|ሁለቱም መንትዮች ሞተዋል
+Value=6;Dead   one of the multiples|ሦስትና በላይ ሆነው ከተወለዱት  ውስጥ አንዱ ሞቷል
+Value=7;Dead  two of the multiples|ሦስትና በላይ ሆነው ከተወለዱት  ውስጥ ሁለቱ ሞተዋል
+Value=8;Dead   all of the multiples|ሦስትና በላይ ሆነው ከተወለዱት  ውስጥ ሁሉም ሞተዋል
+Value=88;Don’t know|አላውቅም
+
+[Item]
+Label=610 Age at birth of first child born
+Name=P610
+Start=163
+Len=2
+ZeroFill=Yes
+
+[Item]
+Label=611More people
+Name=P611
+Start=165
+Len=1
+ZeroFill=Yes
+
+[ValueSet]
+Label=611More people
+Name=P611_VS1
+Value=1;Yes
+Value=2;No
+
+[Record]
+Label=Remittance|በውጭ ሀገር ስለሚኖሩ ኢትዮጽያውያን
+Name=REMITTANCE
+RecordTypeValue='R'
+Required=No
+RecordLen=86
+
+[Item]
+Label=801A Number of male|801A ስንት ወንድ
+Name=R801A
+Start=26
+Len=2
+
+[Item]
+Label=801B Number of female|801B ስንት ሴት
+Name=R801B
+Start=28
+Len=2
+
+[Item]
+Label=801C Counrtr name
+Name=R801C
+Start=30
+Len=1
+DataType=Alpha
+Occurrences=8
+
+[Item]
+Label=802 Country of residence|802 በየትኛው ሀገር ይኖራሉ
+Name=R802
+Start=38
+Len=3
+Occurrences=8
+
+[Item]
+Label=803  Receive any money or goods
+Name=R803
+Start=62
+Len=1
+
+[ValueSet]
+Label=803  Receive any money or goods
+Name=R803_VS1
+Value=1;Yes, both goods and money
+Value=2;Yes, money only
+Value=3;Yes, goods only
+Value=4;No
+
+[Item]
+Label=804 Country of origin|804 ገንዘቡ ወይም እቃው የተላከው ከየትኛው ሀገር ነው
+Name=R804
+Start=63
+Len=3
+Occurrences=8
+
+[Record]
+Label=Mortality number of death in the household
+Name=NO_OF_DEATH
+RecordTypeValue='m'
+Required=No
+RecordLen=31
+
+[Item]
+Label=701 Death since  november 2016_male|701 ከህዳር 2008 እስከ ህዳር 2009 የሞቱ ወንዶች
+Name=P701M
+Start=26
+Len=2
+
+[ValueSet]
+Label=701 Death since  november 2016_male|701 ከህዳር 2008 እስከ ህዳር 2009 የሞቱ ወንዶች
+Name=P701M_VS1
+Value=0:10;Valid
+
+[Item]
+Label=701 Death  since  november 2016_female|701 ከህዳር 2008 እስከ ህዳር 2009 የሞቱ ሴቶች
+Name=P701F
+Start=28
+Len=2
+
+[ValueSet]
+Label=701 Death  since  november 2016_female|701 ከህዳር 2008 እስከ ህዳር 2009 የሞቱ ሴቶች
+Name=P701F_VS1
+Value=0:10;Valid
+
+[Item]
+Label=701 Total number of death since november 2015
+Name=P701T
+Start=30
+Len=2
+ZeroFill=Yes
+
+[Record]
+Label=Mortality
+Name=MORTALITY
+RecordTypeValue='M'
+Required=No
+MaxRecords=10
+RecordLen=61
+
+[Item]
+Label=702 Name of deceased|702 የሟች ስም
+Name=P702
+Start=26
+Len=30
+DataType=Alpha
+
+[Item]
+Label=703 Sex of Deceased|703  የሟች  ፆታ
+Name=P703
+Start=56
+Len=1
+
+[ValueSet]
+Label=703 Sex of Deceased|703  የሟች  ፆታ
+Name=P703_VS1
+Value=1;Male|ወንድ
+Value=2;Female|ሴት
+
+[Item]
+Label=704 Age at death|704 ሲሞቱ የነበራቸው እድሜ
+Name=P704
+Start=57
+Len=2
+
+[ValueSet]
+Label=704 Age at death|704 ሲሞቱ የነበራቸው እድሜ
+Name=P704_VS1
+Value=0:98;Valid
+Value=99;NS
+
+[Item]
+Label=705  Cause of death |705  የሞቱበት ምክንያት
+Name=P705
+Start=59
+Len=2
+
+[ValueSet]
+Label=705  Cause of death |705  የሞቱበት ምክንያት
+Name=P705_VS1
+Value=1;Blood pressure|በደም ብዛት
+Value=2;Diabetes|በስኳር
+Value=3;Accident|በአደጋ
+Value=4;Suicide|እራስን በመግደል
+Value=5;Murdered|በሰው በመገደል
+Value=6;Pregnancy related|ከእርግዝና ጋር በተያያዘ ምክንያት
+Value=7;Malaria|የወባ በሽታ
+Value=8;Tuberculosis|የሳንባ በሽታ
+Value=9;HIV/AIDS|ኤችአይቪ ኤድስ
+Value=10;Others illness|ሌላ ህመም
+Value=88;Do not know|አላውቅም
+
+[Item]
+Label=706  Maternal mortality|706  የእናቶች ሞት
+Name=P706
+Start=61
+Len=1
+
+[ValueSet]
+Label=706  Maternal mortality|706  የእናቶች ሞት
+Name=P706_VS1
+Value=1;Yes|አዎ
+Value=2;No|የለም
+
+[Record]
+Label=Housing
+Name=HOUSING
+RecordTypeValue='H'
+RecordLen=83
+
+[Item]
+Label=201 Type of residence
+Name=H201
+Start=26
+Len=1
+
+[ValueSet]
+Label=201 Type of residence
+Name=H201_VS1
+Value=1;Residential
+Value=2;Hotel/Hostel
+Value=3;Orphanage
+Value=4;Boarding School/College/University
+Value=5;Prison
+Value=6;Other Collective Quarter
+Value=7;Households wondering in search of Water and grass
+Value=8;Homeless
+Value=9;Foreigner/Diplomats
+
+[Item]
+Label=1 Housing information will be
+Name=H1
+Start=27
+Len=1
+ZeroFill=Yes
+
+[ValueSet]
+Label=1 Housing information will be
+Name=H1_VS1
+Value=1;Collected for unit
+Value=2;Skipped
+
+[Item]
+Label=2 Type of housing unit
+Name=H2
+Start=28
+Len=1
+ZeroFill=Yes
+
+[ValueSet]
+Label=2 Type of housing unit
+Name=H2_VS1
+Value=1;Conventional
+Value=2;Improvised
+Value=3;Mobile
+Value=4;Other
+
+[Item]
+Label=3  Rooms in the housing unit
+Name=H3
+Start=29
+Len=2
+ZeroFill=Yes
+
+[Item]
+Label=4 Type of tenure
+Name=H4
+Start=31
+Len=1
+ZeroFill=Yes
+
+[ValueSet]
+Label=4 Type of tenure
+Name=H4_VS1
+Value=1;Owner occupied
+Value=2;Rent free
+Value=3;Rentedfromkebele
+Value=4;Rented from agency of rented houses
+Value=5;Rented from other organization
+Value=6;Rented from private household
+Value=7;Occupied by paying rent difference
+
+[Item]
+Label=5 Major material used for roof
+Name=H5
+Start=32
+Len=1
+ZeroFill=Yes
+
+[ValueSet]
+Label=5 Major material used for roof
+Name=H5_VS1
+Value=1;Corrugated iron sheet
+Value=2;Concrete or cement
+Value=3;Thatch
+Value=4;Wood and mud
+Value=5;Bamboo or reed
+Value=6;Plastic/Shera
+Value=7;Asbestos
+Value=8;Other
+
+[Item]
+Label=6 Major material used for wall
+Name=H6
+Start=33
+Len=2
+ZeroFill=Yes
+
+[ValueSet]
+Label=6 Major material used for wall
+Name=H6_VS1
+Value=1;Wood and mud
+Value=2;Wood and thach/Wood only
+Value=3;Stone and mud
+Value=4;Stone and mud
+Value=5;Plastered Hallow Blocks
+Value=6;UnPlastered Hallow Blocks
+Value=7;Bricks
+Value=8;Currecated Iron
+Value=9;Reed/Bamboo
+Value=10;Mud Brick
+Value=11;sheet metal
+Value=12;Others
+
+[Item]
+Label=7 Major material used for floor
+Name=H7
+Start=35
+Len=1
+ZeroFill=Yes
+
+[ValueSet]
+Label=7 Major material used for floor
+Name=H7_VS1
+Value=1;Mud
+Value=2;Bamboo/Reed
+Value=3;Wood planks
+Value=4;Parquet or polished wood
+Value=5;Cement screed/Cement screed not applied
+Value=6;Plastic tiles
+Value=7;Cement tile/Brick tile
+Value=8;Ceramic/Marble tiles
+Value=9;Other
+
+[Item]
+Label=8 Main source of drinking water
+Name=H8
+Start=36
+Len=1
+ZeroFill=Yes
+
+[ValueSet]
+Label=8 Main source of drinking water
+Name=H8_VS1
+Value=1;Tap inside the house
+Value=2;Tap in compound, private
+Value=3;Tap in compound, shared
+Value=4;Protected well or spring
+Value=5;Unprotected well or spring
+Value=6;River/Lake/Pond
+Value=7;Tap outside compound/From private tap, public tap, other organisation/(bought or free of charge)
+
+[Item]
+Label=9 Type of toilet facility
+Name=H9
+Start=37
+Len=1
+ZeroFill=Yes
+
+[ValueSet]
+Label=9 Type of toilet facility
+Name=H9_VS1
+Value=1;No toilet facility
+Value=2;Flush toilet
+Value=3;VIP Latrine
+Value=4;Pit Latrine
+
+[Item]
+Label=10 Share the toilet with other Household
+Name=H10
+Start=38
+Len=1
+ZeroFill=Yes
+
+[ValueSet]
+Label=10 Share the toilet with other Household
+Name=H10_VS1
+Value=1;Yes
+Value=2;No
+
+[Item]
+Label=11 Bathing facility
+Name=H11
+Start=39
+Len=1
+ZeroFill=Yes
+
+[ValueSet]
+Label=11 Bathing facility
+Name=H11_VS1
+Value=1;No bathing facility
+Value=2;Bathtub private
+Value=3;Bathtub shared
+Value=4;Shower private
+Value=5;Shower shared
+Value=6;A room prepared for bathing
+
+[Item]
+Label=12 Type of Kitchen
+Name=H12
+Start=40
+Len=1
+ZeroFill=Yes
+
+[ValueSet]
+Label=12 Type of Kitchen
+Name=H12_VS1
+Value=1;No kitchen
+Value=2;A room used for traditional kitchen inside the housing unit
+Value=3;A room used for traditional kitchen outside the housing unit
+Value=4;A room used for modern kitchen inside the housing unit
+Value=5;A room used for modern kitchen outside the housing unit
+
+[Item]
+Label=13 Share kitchen with other Households
+Name=H13
+Start=41
+Len=1
+ZeroFill=Yes
+
+[ValueSet]
+Label=13 Share kitchen with other Households
+Name=H13_VS1
+Value=1;Yes
+Value=2;No
+
+[Item]
+Label=14 Housing unit use
+Name=H14
+Start=42
+Len=11
+DataType=Alpha
+
+[ValueSet]
+Label=14 Housing unit use
+Name=H14_VS1
+Value='A          ';Electricity /meter private
+Value='B          ';Electricity /meter shared
+Value='C          ';Electricity from generator private
+Value='D          ';Electricity from generator shared
+Value='E          ';Gas/cylinder for cooking
+Value='F          ';Kerosene for cooking
+Value='G          ';Charcoal for cooking
+Value='H          ';Firewood/Leaves/Sawdust for cooking
+Value='I          ';Dung/manure for cooking
+Value='J          ';Bio-gas for cooking
+Value='K          ';Other items than listed above
+
+[Item]
+Label=15 Source of cooking energy
+Name=H15
+Start=53
+Len=2
+
+[ValueSet]
+Label=15 Source of cooking energy
+Name=H15_VS1
+Value=1;Electricity /meter private
+Value=2;Electricity /meter shared
+Value=3;Electricity from generator private
+Value=4;Electricity from generator shared
+Value=5;Gas/cylinder for cooking
+Value=6;Kerosene for cooking
+Value=7;Charcoal for cooking
+Value=8;Firewood/Leaves/Sawdust for cooking
+Value=9;Dung/manure for cooking
+Value=10;Bio-gas for cooking
+Value=11;Other items than listed above
+
+[Item]
+Label=16 Type of lighting household unit has
+Name=H16
+Start=55
+Len=10
+DataType=Alpha
+
+[ValueSet]
+Label=16 Type of lighting household unit has
+Name=H16_VS1
+Value='A         ';Electricity/Meter private
+Value=' B        ';Electricity/Meter shared
+Value='C         ';Electricity from generator private
+Value='D         ';Electricity from generator Shared
+Value='E         ';Solar energy
+Value='F         ';Lantern
+Value='G         ';Bio-gas
+Value='H         ';Kerosene
+Value='I         ';Candle/Wax candle
+Value='J         ';Firewood
+
+[Item]
+Label=17 Main type of lighting for the household
+Name=H17
+Start=65
+Len=2
+
+[ValueSet]
+Label=17 Main type of lighting for the household
+Name=H17_VS1
+Value=1;Electricity/Meter private
+Value=2;Electricity/Meter shared
+Value=3;Electricity from generator private
+Value=4;Electricity from generator Shared
+Value=5;Solar energy
+Value=6;Lantern
+Value=7;Bio-gas
+Value=8;Kerosene
+Value=9;Candle/Wax candle
+Value=10;Firewood
+
+[Item]
+Label=18 Any member of the household have
+Name=H18
+Start=67
+Len=12
+DataType=Alpha
+
+[ValueSet]
+Label=18 Any member of the household have
+Name=H18_VS1
+Value='A           ';Rradio
+Value=' B          ';Fixed Telephone/Wireless Telephone
+Value='C           '; mobile phone
+Value='D           ';Television
+Value='E           ';car
+Value='F           ';Motor cycle
+Value='G           ';Bicycle
+Value='H           ';Refergrator
+Value='I           ';Tractor
+Value='J           ';Animal driven cart
+Value='K           ';Personal computer/lap Top
+Value='L           ';Internet connection
+
+[Item]
+Label=19 Household have internet
+Name=H19
+Start=79
+Len=1
+ZeroFill=Yes
+
+[ValueSet]
+Label=19 Household have internet
+Name=H19_VS1
+Value=1;Yes fixed /cable/WIFI
+Value=2;Yes modem/CDMA/Celular
+Value=3;No
+
+[Item]
+Label=20 Main means of Disposal
+Name=H20
+Start=80
+Len=1
+ZeroFill=Yes
+
+[ValueSet]
+Label=20 Main means of Disposal
+Name=H20_VS1
+Value=1;No disposal System
+Value=2;Piped system connected to public sewarage disposal plant
+Value=3;Piped system connected to individual sewarage disposal septic tand Cesspool
+Value=4;Other toilet empties in to and open ditch, river, lake, pond
+
+[Item]
+Label=20 Housing unit dispose solid waste
+Name=H20_B
+Start=81
+Len=1
+ZeroFill=Yes
+
+[ValueSet]
+Label=20 Housing unit dispose solid waste
+Name=H20_B_VS1
+Value=1;Collected by Municipality (Public Dump)
+Value=2;Collected by private establishments/individuals
+Value=3;Dumped in street/Open space
+Value=4;Dumped in river
+Value=5;Burned/Buried solid waste
+Value=6;Other
+
+[Item]
+Label=21 Livestock spend the night in the room(s) where members spend
+Name=H21
+Start=82
+Len=1
+ZeroFill=Yes
+
+[ValueSet]
+Label=21 Livestock spend the night in the room(s) where members spend
+Name=H21_VS1
+Value=1;Yes
+Value=2;No
+Value=3;No livestock
+
+[Item]
+Label=Final result
+Name=FINAL_RESULT
+Start=83
+Len=1
+
+[ValueSet]
+Label=Final result
+Name=FINAL_RESULT_VS1
+Value=1;Completed
+Value=2;No household members at home
+Value=3;Entire household absent for extended period of time
+Value=4;Dwelling Vacant
+Value=5;Refusal
+Value=6;Partially  completed
+
+[ValueSet]
+Label=Final result
+Name=FINAL_RESULT_VS2
+Value=2;No household members at home
+Value=3;Entire household absent for extended period of time
+Value=4;Dwelling Vacant
+Value=5;Refusal
+Value=6;Continue  interview
+
+[Record]
+Label=Axullary
+Name=AXULLARY
+RecordTypeValue='A'
+RecordLen=33
+
+[Item]
+Label=Start time
+Name=START_TIME
+Start=26
+Len=4
+ZeroFill=Yes
+
+[Item]
+Label=Start hour
+Name=START_HOUR
+Start=26
+Len=2
+ItemType=SubItem
+ZeroFill=Yes
+
+[ValueSet]
+Label=Start hour
+Name=START_HOUR_VS1
+Link=73000192
+Value=0:23;hours
+
+[Item]
+Label=Start minute
+Name=START_MINUTE
+Start=28
+Len=2
+ItemType=SubItem
+ZeroFill=Yes
+
+[ValueSet]
+Label=Start minute
+Name=START_MINUTE_VS1
+Link=72999928
+Value=0:59;minute
+
+[Item]
+Label=End time
+Name=END_TIME
+Start=30
+Len=4
+ZeroFill=Yes
+
+[Item]
+Label=End hour
+Name=END_HOUR
+Start=30
+Len=2
+ItemType=SubItem
+ZeroFill=Yes
+
+[ValueSet]
+Label=End hour
+Name=END_HOUR_VS1
+Link=73000192
+
+[Item]
+Label=End minute
+Name=END_MINUTE
+Start=32
+Len=2
+ItemType=SubItem
+ZeroFill=Yes
+
+[ValueSet]
+Label=End minute
+Name=END_MINUTE_VS1
+Link=72999928
