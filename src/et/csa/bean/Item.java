@@ -17,8 +17,10 @@ public final class Item {
     private int start; 
     private int length;
     private int occurrences;
+    private int decimal;
     private boolean subItem;
     private boolean zeroFill;
+    private boolean decimalChar;
     private final List<Item> subItems = new ArrayList<>();
     private final List<ValueSet> valueSets = new ArrayList<>();
     
@@ -66,6 +68,14 @@ public final class Item {
         this.occurrences = occurrences;
     }
 
+    public int getDecimal() {
+        return decimal;
+    }
+
+    public void setDecimal(int decimal) {
+        this.decimal = decimal;
+    }
+
     public boolean isSubItem() {
         return subItem;
     }
@@ -80,6 +90,14 @@ public final class Item {
 
     public void setZeroFill(boolean zeroFill) {
         this.zeroFill = zeroFill;
+    }
+
+    public boolean hasDecimalChar() {
+        return decimalChar;
+    }
+
+    public void setDecimalChar(boolean decimalChar) {
+        this.decimalChar = decimalChar;
     }
 
     public List<Item> getSubItems() {

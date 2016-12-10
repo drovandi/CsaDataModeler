@@ -42,8 +42,10 @@ public class Migrator {
         Connection connDst = null;
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
+            String srcSchema = prop.getProperty("db.source.schema");
+            String srcDataTable = prop.getProperty("db.source.data.table");
             connSrc = DriverManager.getConnection(
-                    prop.getProperty("db.source.uri")+"/"+prop.getProperty("db.source.schema")+"?autoReconnect=true&useSSL=false",
+                    prop.getProperty("db.source.uri")+"/"+srcSchema+"?autoReconnect=true&useSSL=false",
                     prop.getProperty("db.source.username"),
                     prop.getProperty("db.source.password"));
             connSrc.setReadOnly(true);
@@ -55,7 +57,7 @@ public class Migrator {
             
             Statement stmtSrc = connSrc.createStatement();
             Statement stmtDst = connDst.createStatement();
-            ResultSet result = stmtSrc.executeQuery("select questionnaire from ipums.ipums_data_dict limit 100");
+            ResultSet result = stmtSrc.executeQuery("select questionnaire from "+srcSchema+"."+srcDataTable+" limit 100");
             while (result.next()) {
                 String questionnaire = result.getString(1);
                 Map<Record, List<List<String>>> descr = QuestionnaireParser.parse(dictionary, questionnaire);

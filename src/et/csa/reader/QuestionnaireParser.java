@@ -13,7 +13,7 @@ public class QuestionnaireParser {
     
     public static Map<Record,List<List<String>>> parse(Dictionary dictionary, String questionnaire) {
         Map<Record,List<List<String>>> result = new LinkedHashMap<>();
-        String[] rows = questionnaire.split("(?<!\r)\n");
+        String[] rows = questionnaire.split(Dictionary.DICT_NEWLINE_REGEXP);
         Record record = dictionary.getMainRecord();
         List<List<String>> valuesList = new LinkedList<>();
         result.put(record,valuesList);
@@ -40,15 +40,25 @@ public class QuestionnaireParser {
     
     private static void parseItem(Item item, String row, List<String> values) {
         String v = row.substring(item.getStart()-1,item.getStart()-1+item.getLength());
-        switch (item.getDataType()) {
-            case "Number":
-                if (v.trim().isEmpty()) values.add(null);
-                else values.add(v);
-                break;
-            case "Alpha":
-                if (v.trim().isEmpty()) values.add(null);
-                else values.add("\""+v+"\"");
-                break;
+        if (v.trim().isEmpty()) {
+          values.add(null);
+        } else {
+            switch (item.getDataType()) {
+                case "Number":
+                    if (item.getDecimal()>0 && !item.hasDecimalChar()) {
+                        String head = v.substring(0, v.length()-item.getDecimal()).trim();
+                        if (head.isEmpty()) head = "0";
+                        String tail = v.substring(v.length()-item.getDecimal()).trim();
+                        if (tail.isEmpty()) tail = "0";
+                        values.add(head+"."+tail);
+                    } else {
+                        values.add(v);
+                    }
+                    break;
+                case "Alpha":
+                    values.add("\""+v+"\"");
+                    break;
+            }
         }
         for (Item subItem : item.getSubItems()) {
             parseItem(subItem, row, values);

@@ -1,6 +1,7 @@
 
 package et.csa.bean;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,6 +23,7 @@ public final class Dictionary {
     public static final String DICT_NAME = "Name";
     public static final String DICT_NOTE = "Note";
     public static final String DICT_NOTENEWLINE = "\r\n";
+    public static final String DICT_NEWLINE_REGEXP = "(?<!\r)\n";
     public static final String DICT_YES = "Yes";
     public static final String DICT_NO = "No";
     public static final String DICT_OCCLABEL = "OccurrenceLabel";
@@ -69,6 +71,7 @@ public final class Dictionary {
     private final String schema;
     private final List<Record> records = new LinkedList<>();
     private final Map<String,Record> recordsByName = new LinkedHashMap<>();
+    private final Map<String,ValueSet> valueSets = new HashMap<>();
 
     private Record lastRecord;
     private Item lastItem;
@@ -105,6 +108,15 @@ public final class Dictionary {
     }
 
     public void addValueSet(ValueSet valueSet) {
+        if (valueSet.getLink()!=null && !valueSet.getLink().isEmpty() &&
+                valueSets.containsKey(valueSet.getLink())) {
+            valueSet = valueSets.get(valueSet.getLink());
+        } else {
+            if (valueSet.isEmpty()) return;
+            if (valueSet.getLink()!=null && !valueSet.getLink().isEmpty()) {
+                this.valueSets.put(valueSet.getLink(),valueSet);
+            }
+        }
         this.lastItem.addValueSet(valueSet);
     }
     

@@ -45,6 +45,10 @@ public final class BeanFactory {
                 item.setZeroFill(Dictionary.DICT_YES.equals(getValue(line)));
             } else if (line.startsWith(Dictionary.ITEM_OCCS)) {
                 item.setOccurrences(Integer.parseInt(getValue(line)));
+            } else if (line.startsWith(Dictionary.ITEM_DECCHAR)) {
+                item.setDecimalChar("Yes".equals(getValue(line)));
+            } else if (line.startsWith(Dictionary.ITEM_DECIMAL)) {
+                item.setDecimal(Integer.parseInt(getValue(line)));
             } else if (line.isEmpty()) {
                 break;
             }
