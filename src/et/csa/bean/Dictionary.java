@@ -74,8 +74,8 @@ public final class Dictionary {
     private final Map<String,ValueSet> valueSets = new HashMap<>();
 
     private Record lastRecord;
-    private Item lastItem;
-    private Item lastItemNotSubItem;
+    private List<Item> lastItems;
+    private List<Item> lastItemsNotSubItem;
 
     public Dictionary(String schema) {
         this.schema = schema;
@@ -98,13 +98,30 @@ public final class Dictionary {
     }
 
     public void addItem(Item item) {
-        if (item.isSubItem()) {
-            this.lastItemNotSubItem.addSubItem(item);
+        if (item.getOccurrences()>1) {
+            List<Item> its = new LinkedList<>();
+            for (int i=0; i<item.getOccurrences(); i++) {
+                Item it = item.clone();
+                it.setName(it.getName()+"_"+i);
+                it.setStart(it.getStart()+i*it.getLength());
+                its.add(it);
+            }
+            if (item.isSubItem()) {
+                addSubItems(its);
+            } else {
+                addLastItemsNotSubItem(its);
+                this.lastRecord.addItems(its);
+            }
+            addLastItems(its);
         } else {
-            this.lastItemNotSubItem = item;
-            this.lastRecord.addItem(item);
+            if (item.isSubItem()) {
+                addSubItem(item);
+            } else {
+                addLastItemNotSubItem(item);
+                this.lastRecord.addItem(item);
+            }
+            addLastItem(item);
         }
-        this.lastItem = item;
     }
 
     public void addValueSet(ValueSet valueSet) {
@@ -117,7 +134,45 @@ public final class Dictionary {
                 this.valueSets.put(valueSet.getLink(),valueSet);
             }
         }
-        this.lastItem.addValueSet(valueSet);
+        addValueSetToLastItems(valueSet);
+    }
+    
+    private void addLastItem(Item item) {
+        this.lastItems = new LinkedList<>();
+        this.lastItems.add(item);
+    }
+    
+    private void addLastItems(List<Item> items) {
+        this.lastItems = items;
+    }
+    
+    private void addValueSetToLastItems(ValueSet valueSet) {
+        for (Item item : this.lastItems) {
+            item.addValueSet(valueSet);
+        }
+    }
+    
+    private void addLastItemNotSubItem(Item item) {
+        this.lastItemsNotSubItem = new LinkedList<>();
+        this.lastItemsNotSubItem.add(item);
+    }
+    
+    private void addLastItemsNotSubItem(List<Item> items) {
+        this.lastItemsNotSubItem = items;
+    }
+    
+    private void addSubItem(Item subItem) {
+        for (Item item : this.lastItemsNotSubItem) {
+            item.addSubItem(subItem);
+        }
+    }
+    
+    private void addSubItems(List<Item> subItems) {
+        for (Item item : this.lastItemsNotSubItem) {
+            for (Item subItem : subItems) {
+                item.addSubItem(subItem);
+            }
+        }
     }
     
     public Record getMainRecord() {

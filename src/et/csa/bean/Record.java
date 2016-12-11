@@ -66,6 +66,10 @@ public final class Record {
         items.add(it);
     }
     
+    public void addItems(List<Item> its) {
+        items.addAll(its);
+    }
+    
     public List<Item> getItems() {
         return items;
     }

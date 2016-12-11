@@ -150,4 +150,19 @@ public final class Item {
         return Objects.equals(this.name, other.name);
     }
     
+    @Override
+    public Item clone() {
+        Item clone = new Item();
+        clone.dataType = this.dataType;
+        clone.decimal = this.decimal;
+        clone.decimalChar = this.decimalChar;
+        clone.length = this.length;
+        clone.name = this.name;
+        clone.occurrences = this.occurrences;
+        clone.start = this.start;
+        clone.subItem = this.subItem;
+        clone.zeroFill = this.zeroFill;
+        return clone;
+    }
+    
 }
