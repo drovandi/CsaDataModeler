@@ -18,7 +18,7 @@ public class DictionaryReader {
     
     public static Dictionary read(String schema, String fileName) throws Exception {
         Dictionary dictionary = new Dictionary(schema);
-        try (InputStream in = SchemaEngine.class.getResourceAsStream(fileName)) {
+        try (InputStream in = SchemaEngine.class.getResourceAsStream("/"+fileName)) {
             try (InputStreamReader fr = new InputStreamReader(in)) {
                 try (BufferedReader br = new BufferedReader(fr)) {
                     String line;

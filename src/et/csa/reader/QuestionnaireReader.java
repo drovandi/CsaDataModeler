@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class QuestionnaireParser {
+public class QuestionnaireReader {
     
     public static Map<Record,List<List<String>>> parse(Dictionary dictionary, String questionnaire) {
         Map<Record,List<List<String>>> result = new LinkedHashMap<>();

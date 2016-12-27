@@ -4,8 +4,8 @@ package et.csa;
 import et.csa.bean.Dictionary;
 import et.csa.bean.Record;
 import et.csa.reader.DictionaryReader;
-import et.csa.reader.QuestionnaireParser;
-import et.csa.writer.InsertCreator;
+import et.csa.reader.QuestionnaireReader;
+import et.csa.writer.InsertWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -19,23 +19,23 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Migrator {
+public class LoaderEngine {
     
-    private static final Logger LOGGER = Logger.getLogger(Migrator.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(LoaderEngine.class.getName());
     
     public static void main(String[] args) {
         Dictionary dictionary;
-        try {
-            dictionary = DictionaryReader.read("ipums","IPUMS.dcf");
-        } catch (Exception ex) {
-            LOGGER.log(Level.SEVERE, "Impossible to read dictionary file", ex);
-            return;
-        }
         Properties prop = new Properties();
-        try (InputStream in = SchemaEngine.class.getResourceAsStream("database.properties")) {
+        try (InputStream in = SchemaEngine.class.getResourceAsStream("/database.properties")) {
             prop.load(in);
         } catch (IOException ex) {
             LOGGER.log(Level.SEVERE, "Cannot read properties file", ex);
+            return;
+        }
+        try {
+            dictionary = DictionaryReader.read(prop.getProperty("db.dest.schema"),prop.getProperty("dictionary.filename"));
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, "Impossible to read dictionary file", ex);
             return;
         }
         Connection connSrc = null;
@@ -60,8 +60,8 @@ public class Migrator {
             ResultSet result = stmtSrc.executeQuery("select questionnaire from "+srcSchema+"."+srcDataTable+" limit 100");
             while (result.next()) {
                 String questionnaire = result.getString(1);
-                Map<Record, List<List<String>>> descr = QuestionnaireParser.parse(dictionary, questionnaire);
-                InsertCreator.create(dictionary, descr, stmtDst);
+                Map<Record, List<List<String>>> descr = QuestionnaireReader.parse(dictionary, questionnaire);
+                InsertWriter.create(dictionary, descr, stmtDst);
             }
             connDst.commit();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {

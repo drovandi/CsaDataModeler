@@ -10,7 +10,7 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
 
-public class InsertCreator {
+public class InsertWriter {
 
     public static void create(Dictionary dictionary, Map<Record, List<List<String>>> descr, Statement stmt) throws SQLException {
         int id = 0;
