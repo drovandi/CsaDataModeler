@@ -6,7 +6,9 @@ import et.csa.bean.Item;
 import et.csa.bean.Record;
 import et.csa.bean.ValueSet;
 import java.io.PrintStream;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * This class writes the SQL scripts to create a MySQL DB schema parsing the
@@ -16,7 +18,7 @@ import java.util.Map;
  */
 public class SchemaWriter {
 
-    public static void execute(String schema, Dictionary dictionary, PrintStream ps) {
+    public static void write(String schema, Dictionary dictionary, PrintStream ps) {
         ps.println("CREATE SCHEMA " + schema + ";");
         ps.println();
 
@@ -80,16 +82,25 @@ public class SchemaWriter {
             ps.println("    PRIMARY KEY (ID)");
             ps.println(") ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;");
             ps.println();
+            boolean first = true;
+            Set<String> keys = new HashSet<>();
             ps.println("INSERT INTO " + schema + "." + item.getValueSetName() + "(ID,VALUE) VALUES ");
             for (int i=0; i<item.getValueSets().size(); i++) {
                 ValueSet valueSet = item.getValueSets().get(i);
                 int j=0;
                 for (Map.Entry<String, String> e : valueSet.getValues().entrySet()) {
+                	if (keys.contains(e.getKey())) {
+                		continue;
+                	}
+                	if (!first) {
+                    	ps.println(",");
+                	}
                     ps.print("    (" + e.getKey() + ",\"" + e.getValue() + "\")");
-                    if (++j==valueSet.getValues().size()) ps.println(";");
-                    else ps.println(",");
+            		keys.add(e.getKey());
+                    first = false;
                 }
             }
+            ps.println(";");
             ps.println();
         }
         for (Item subItem : item.getSubItems()) {

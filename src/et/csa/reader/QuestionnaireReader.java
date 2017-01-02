@@ -11,6 +11,7 @@ import java.util.Map;
 
 public class QuestionnaireReader {
     
+	//Parse a questionnaire (CSPro plain text file) according to its dictionary 
     public static Map<Record,List<List<String>>> parse(Dictionary dictionary, String questionnaire) {
         Map<Record,List<List<String>>> result = new LinkedHashMap<>();
         String[] rows = questionnaire.split(Dictionary.DICT_NEWLINE_REGEXP);

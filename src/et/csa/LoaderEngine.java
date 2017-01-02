@@ -24,31 +24,42 @@ public class LoaderEngine {
     private static final Logger LOGGER = Logger.getLogger(LoaderEngine.class.getName());
     
     public static void main(String[] args) {
-        Dictionary dictionary;
+        
+    	Dictionary dictionary;
         Properties prop = new Properties();
+        
+        //Load property file
         try (InputStream in = SchemaEngine.class.getResourceAsStream("/database.properties")) {
             prop.load(in);
         } catch (IOException ex) {
             LOGGER.log(Level.SEVERE, "Cannot read properties file", ex);
             return;
         }
+        
+        //Parse dictionary file
         try {
-            dictionary = DictionaryReader.read(prop.getProperty("db.dest.schema"),prop.getProperty("dictionary.filename"));
+            dictionary = DictionaryReader.read(prop.getProperty("dictionary.filename"));
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, "Impossible to read dictionary file", ex);
             return;
         }
+        
         Connection connSrc = null;
         Connection connDst = null;
+        
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             String srcSchema = prop.getProperty("db.source.schema");
             String srcDataTable = prop.getProperty("db.source.data.table");
+            
+            //Connect to the source database
             connSrc = DriverManager.getConnection(
                     prop.getProperty("db.source.uri")+"/"+srcSchema+"?autoReconnect=true&useSSL=false",
                     prop.getProperty("db.source.username"),
                     prop.getProperty("db.source.password"));
             connSrc.setReadOnly(true);
+            
+            //Connect to the destination database
             connDst = DriverManager.getConnection(
                     prop.getProperty("db.dest.uri")+"/"+prop.getProperty("db.dest.schema")+"?autoReconnect=true&useSSL=false",
                     prop.getProperty("db.dest.username"),
@@ -57,11 +68,18 @@ public class LoaderEngine {
             
             Statement stmtSrc = connSrc.createStatement();
             Statement stmtDst = connDst.createStatement();
+            
+            //Get questionnaires from source database (CSPro plain text files)
             ResultSet result = stmtSrc.executeQuery("select questionnaire from "+srcSchema+"."+srcDataTable+" limit 100");
             while (result.next()) {
+            	
                 String questionnaire = result.getString(1);
-                Map<Record, List<List<String>>> descr = QuestionnaireReader.parse(dictionary, questionnaire);
-                InsertWriter.create(dictionary, descr, stmtDst);
+                
+                //Get the microdata parsing CSPro plain text files according to its dictionary
+                Map<Record, List<List<String>>> microdata = QuestionnaireReader.parse(dictionary, questionnaire);
+                
+                //Generate the insert statements (to store microdata into the destination database)
+                InsertWriter.create(prop.getProperty("db.dest.schema"), dictionary, microdata, stmtDst);
             }
             connDst.commit();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
@@ -84,5 +102,4 @@ public class LoaderEngine {
             }
         }
     }
-    
 }

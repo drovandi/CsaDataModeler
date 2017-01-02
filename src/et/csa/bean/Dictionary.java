@@ -68,7 +68,6 @@ public final class Dictionary {
     public static final String RELATION_SECONDARY = "Secondary";
     public static final String RELATION_SECONDARYLINK = "SecondaryLink";
 
-    private final String schema;
     private final List<Record> records = new LinkedList<>();
     private final Map<String,Record> recordsByName = new LinkedHashMap<>();
     private final Map<String,ValueSet> valueSets = new HashMap<>();
@@ -76,14 +75,6 @@ public final class Dictionary {
     private Record lastRecord;
     private List<Item> lastItems;
     private List<Item> lastItemsNotSubItem;
-
-    public Dictionary(String schema) {
-        this.schema = schema;
-    }
-
-    public String getSchema() {
-        return schema;
-    }
 
     public void addRecord(Record record) {
         if (this.records.isEmpty()) {

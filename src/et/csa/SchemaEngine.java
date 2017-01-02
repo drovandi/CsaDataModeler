@@ -20,15 +20,28 @@ public class SchemaEngine {
     private static final Logger LOGGER = Logger.getLogger(SchemaEngine.class.getName());
 
     public static void main(String[] args) throws Exception {
-        Properties prop = new Properties();
+
+    	Dictionary dictionary;
+    	Properties prop = new Properties();
+        
+        //Load property file
         try (InputStream in = SchemaEngine.class.getResourceAsStream("/database.properties")) {
             prop.load(in);
         } catch (IOException ex) {
             LOGGER.log(Level.SEVERE, "Cannot read properties file", ex);
             return;
         }
-        Dictionary dictionary = DictionaryReader.read(prop.getProperty("db.source.schema"),prop.getProperty("dictionary.filename"));
-        SchemaWriter.execute(dictionary.getSchema(), dictionary, System.out);
+        
+        //Parse dictionary file
+        try {
+            dictionary = DictionaryReader.read(prop.getProperty("dictionary.filename"));
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, "Impossible to read dictionary file", ex);
+            return;
+        }
+        
+        //Generate the database schema sql script
+        SchemaWriter.write(prop.getProperty("db.dest.schema"), dictionary, System.out);
     }
         
 }

@@ -4,7 +4,6 @@ package et.csa.writer;
 import et.csa.bean.Dictionary;
 import et.csa.bean.Item;
 import et.csa.bean.Record;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
@@ -12,11 +11,11 @@ import java.util.Map;
 
 public class InsertWriter {
 
-    public static void create(Dictionary dictionary, Map<Record, List<List<String>>> descr, Statement stmt) throws SQLException {
+    public static void create(String schema, Dictionary dictionary, Map<Record, List<List<String>>> descr, Statement stmt) throws SQLException {
         int id = 0;
         for (Map.Entry<Record, List<List<String>>> e : descr.entrySet()) {
             Record record = e.getKey();
-            String sql = "insert into " + dictionary.getSchema() + "." + record.getName() + " (";
+            String sql = "insert into " + schema + "." + record.getName() + " (";
             boolean first = true;
             if (!record.isMainRecord()) {
                 first = false;
