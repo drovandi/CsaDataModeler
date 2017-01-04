@@ -38,7 +38,9 @@ public class LoaderEngine {
         
         //Parse dictionary file
         try {
-            dictionary = DictionaryReader.read(prop.getProperty("dictionary.filename"));
+            dictionary = DictionaryReader.read(
+                    prop.getProperty("dictionary.filename"),
+                    prop.getProperty("db.dest.table.prefix"));
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, "Impossible to read dictionary file", ex);
             return;

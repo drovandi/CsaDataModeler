@@ -6,9 +6,9 @@ import java.io.IOException;
 
 public final class BeanFactory {
     
-    public static Record createRecord(BufferedReader br) throws IOException {
+    public static Record createRecord(BufferedReader br, String tablePrefix) throws IOException {
         String line;
-        Record record = new Record();
+        Record record = new Record(tablePrefix);
         while ( (line=br.readLine())!=null ) {
             if (line.startsWith(Dictionary.DICT_NAME)) {
                 record.setName(getValue(line));

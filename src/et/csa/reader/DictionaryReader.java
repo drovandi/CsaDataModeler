@@ -16,7 +16,7 @@ import java.io.InputStreamReader;
  */
 public class DictionaryReader {
     
-    public static Dictionary read(String fileName) throws Exception {
+    public static Dictionary read(String fileName, String tablePrefix) throws Exception {
         Dictionary dictionary = new Dictionary();
         try (InputStream in = SchemaEngine.class.getResourceAsStream("/"+fileName)) {
             try (InputStreamReader fr = new InputStreamReader(in)) {
@@ -26,7 +26,7 @@ public class DictionaryReader {
                         switch (line) {
                             case Dictionary.DICT_LEVEL:
                             case Dictionary.DICT_RECORD:
-                                dictionary.addRecord(BeanFactory.createRecord(br));
+                                dictionary.addRecord(BeanFactory.createRecord(br, tablePrefix));
                                 break;
                             case Dictionary.DICT_ITEM:
                                 dictionary.addItem(BeanFactory.createItem(br));

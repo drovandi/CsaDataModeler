@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 public final class Record {
     
-    private String name;
+    private String name, tablePrefix;
     private String recordTypeValue;
     private boolean required;
     private int max;
@@ -22,8 +22,17 @@ public final class Record {
     private boolean isMainRecord = false;
     private final List<Item> items = new LinkedList<>();
 
+    public Record(String tablePrefix) {
+        if (tablePrefix==null) tablePrefix = "";
+        this.tablePrefix = tablePrefix;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public String getTableName() {
+        return (tablePrefix + name).toUpperCase();
     }
 
     public void setName(String name) {

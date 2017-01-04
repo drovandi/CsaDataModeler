@@ -29,7 +29,7 @@ public class SchemaWriter {
         }
 
         for (Record record : dictionary.getRecords()) {
-            ps.println("CREATE TABLE " + schema + "." + record.getName() + " (");
+            ps.println("CREATE TABLE " + schema + "." + record.getTableName() + " (");
             ps.println("    ID INT(9) UNSIGNED AUTO_INCREMENT,");
             if (!record.isMainRecord()) {
                 ps.println("    " + record.getMainRecord().getName() + " INT(9) UNSIGNED NOT NULL,");
@@ -40,7 +40,7 @@ public class SchemaWriter {
             }
             if (!record.isMainRecord()) {
                 ps.println("    INDEX (" + record.getMainRecord().getName() + "),");
-                ps.println("    FOREIGN KEY (" + record.getMainRecord().getName() + ") REFERENCES " + schema + "." + record.getMainRecord().getName() + "(id),");
+                ps.println("    FOREIGN KEY (" + record.getMainRecord().getName() + ") REFERENCES " + schema + "." + record.getMainRecord().getTableName() + "(id),");
             }
             ps.println("    PRIMARY KEY (ID)");
             ps.println(") ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;");
@@ -107,41 +107,5 @@ public class SchemaWriter {
             printValueSet(schema,subItem,ps);
         }
     }
-    /*
-    private static void printValueSet(String schema, Item item, PrintStream ps) {
-        if (item.hasValueSets()) {
-            ps.println("CREATE TABLE " + schema + "." + item.getValueSetName() + " (");
-            ps.println("    ID INT(9) UNSIGNED AUTO_INCREMENT,");
-            ps.println("    VS_COUNT INT(" + ((int)Math.floor(Math.log10(item.getValueSets().size()))+1)+ ") UNSIGNED,");
-            switch (item.getDataType()) {
-                case Dictionary.ITEM_ALPHA:
-                    ps.println("    VS_KEY CHAR(" + item.getLength()+ "),");
-                    break;
-                case "Number":
-                    ps.println("    VS_KEY INT(" + item.getLength() + "),");
-                    break;
-            }
-            ps.println("    VS_VALUE CHAR(" + item.getValueSetsValueLength() + "),");
-            ps.println("    PRIMARY KEY (ID)");
-            ps.println(") ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;");
-            ps.println();
-            ps.println("INSERT INTO " + schema + "." + item.getValueSetName() + "(VS_COUNT,VS_KEY,VS_VALUE) VALUES ");
-            for (int i=0; i<item.getValueSets().size(); i++) {
-                ValueSet valueSet = item.getValueSets().get(i);
-                int j=0;
-                for (Map.Entry<String, String> e : valueSet.getValues().entrySet()) {
-                    ps.print("    (" + i + "," + e.getKey() + ",\"" + e.getValue() + "\")");
-                    if (++j==valueSet.getValues().size()) ps.println(";");
-                    else ps.println(",");
-                }
-            }
-            ps.println();
-            ps.println("CREATE INDEX IDX_" + item.getValueSetName() + "_KEY ON " + schema + "." + item.getValueSetName() + "(VS_KEY) USING BTREE;");
-            ps.println();
-        }
-        for (Item subItem : item.getSubItems()) {
-            printValueSet(schema,subItem,ps);
-        }
-    }
-    */
+
 }

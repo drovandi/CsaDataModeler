@@ -15,7 +15,7 @@ public class InsertWriter {
         int id = 0;
         for (Map.Entry<Record, List<List<String>>> e : descr.entrySet()) {
             Record record = e.getKey();
-            String sql = "insert into " + schema + "." + record.getName() + " (";
+            String sql = "insert into " + schema + "." + record.getTableName() + " (";
             boolean first = true;
             if (!record.isMainRecord()) {
                 first = false;
