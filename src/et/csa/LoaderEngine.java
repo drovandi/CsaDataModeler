@@ -6,13 +6,17 @@ import et.csa.bean.Record;
 import et.csa.reader.DictionaryReader;
 import et.csa.reader.QuestionnaireReader;
 import et.csa.writer.InsertWriter;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -22,14 +26,24 @@ import java.util.logging.Logger;
 public class LoaderEngine {
     
     private static final Logger LOGGER = Logger.getLogger(LoaderEngine.class.getName());
+    private static final int RECORDS_LIMIT = 100;
+    private static final String ERROR_STMT = "insert into CSPRO2SQL_ERRORS (ERROR, DATE, CSPRO_GUID, QUESTIONNAIRE) values (?,?,?,?)";
+    private static final String LAST_UPDATE_INSERT_STMT = "update CSPRO2SQL_LASTUPDATE set LAST_UPDATE = ?";
+    private static final String LAST_UPDATE_SELECT_STMT = "select LAST_UPDATE from CSPRO2SQL_LASTUPDATE";
     
     public static void main(String[] args) {
-        
+        execute("/database.properties");
+    }
+    
+    static void execute(String propertiesFile) {
     	Dictionary dictionary;
         Properties prop = new Properties();
-        
+        boolean isLocalFile = new File(propertiesFile).exists();
         //Load property file
-        try (InputStream in = SchemaEngine.class.getResourceAsStream("/database.properties")) {
+        try (InputStream in =
+            (isLocalFile?
+                new FileInputStream(propertiesFile):
+                LoaderEngine.class.getResourceAsStream(propertiesFile))) {
             prop.load(in);
         } catch (IOException ex) {
             LOGGER.log(Level.SEVERE, "Cannot read properties file", ex);
@@ -68,21 +82,43 @@ public class LoaderEngine {
                     prop.getProperty("db.dest.password"));
             connDst.setAutoCommit(false);
             
-            Statement stmtSrc = connSrc.createStatement();
             Statement stmtDst = connDst.createStatement();
+            PreparedStatement errorStmt = connDst.prepareStatement(ERROR_STMT);
+            PreparedStatement lastUpdateStmt = connDst.prepareStatement(LAST_UPDATE_INSERT_STMT);
+            PreparedStatement selectQuestionnaire = connSrc.prepareStatement("select questionnaire, guid from "+srcSchema+"."+srcDataTable+" where modified_time >= ?  limit "+RECORDS_LIMIT);
             
+            Timestamp now = new Timestamp(System.currentTimeMillis());
+            ResultSet result = stmtDst.executeQuery(LAST_UPDATE_SELECT_STMT);
+            result.next();
+            Timestamp dTimestamp = result.getTimestamp(1);
+
             //Get questionnaires from source database (CSPro plain text files)
-            ResultSet result = stmtSrc.executeQuery("select questionnaire from "+srcSchema+"."+srcDataTable+" limit 100");
+            selectQuestionnaire.setTimestamp(1, dTimestamp);
+            result = selectQuestionnaire.executeQuery();
             while (result.next()) {
-            	
                 String questionnaire = result.getString(1);
-                
+                InputStream binaryStream = result.getBinaryStream(2);
                 //Get the microdata parsing CSPro plain text files according to its dictionary
-                Map<Record, List<List<String>>> microdata = QuestionnaireReader.parse(dictionary, questionnaire);
-                
-                //Generate the insert statements (to store microdata into the destination database)
-                InsertWriter.create(prop.getProperty("db.dest.schema"), dictionary, microdata, stmtDst);
+                try {
+                    Map<Record, List<List<String>>> microdata = QuestionnaireReader.parse(dictionary, questionnaire);
+                    //Generate the insert statements (to store microdata into the destination database)
+                    InsertWriter.create(prop.getProperty("db.dest.schema"), dictionary, microdata, stmtDst);
+                    connDst.commit();
+                } catch (Exception e) {
+                    connDst.rollback();
+                    String msg = "Impossible to transfer questionnaire - "+e.getMessage();
+                    if (msg.length()>2048) msg = msg.substring(0, 2048);
+                    errorStmt.setString(1, msg);
+                    errorStmt.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+                    errorStmt.setBinaryStream(3, binaryStream);
+                    errorStmt.setString(4, questionnaire);
+                    errorStmt.executeUpdate();
+                    connDst.commit();
+                }
             }
+            
+            lastUpdateStmt.setTimestamp(1, now);
+            lastUpdateStmt.executeUpdate();
             connDst.commit();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             try {
@@ -104,4 +140,5 @@ public class LoaderEngine {
             }
         }
     }
+    
 }

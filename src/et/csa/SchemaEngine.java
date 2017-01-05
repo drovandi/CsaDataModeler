@@ -6,6 +6,7 @@ import et.csa.reader.DictionaryReader;
 import et.csa.writer.SchemaWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,8 +21,6 @@ public class SchemaEngine {
     private static final Logger LOGGER = Logger.getLogger(SchemaEngine.class.getName());
 
     public static void main(String[] args) throws Exception {
-
-    	Dictionary dictionary;
     	Properties prop = new Properties();
         
         //Load property file
@@ -34,16 +33,19 @@ public class SchemaEngine {
         
         //Parse dictionary file
         try {
-            dictionary = DictionaryReader.read(
+            Dictionary dictionary = DictionaryReader.read(
                     prop.getProperty("dictionary.filename"),
                     prop.getProperty("db.dest.table.prefix"));
+            execute(dictionary, prop.getProperty("db.dest.schema"), System.out);
         } catch (Exception ex) {
-            LOGGER.log(Level.SEVERE, "Impossible to read dictionary file", ex);
-            return;
+            LOGGER.log(Level.SEVERE, "Impossible to create the database schema", ex);
+            System.exit(1);
         }
         
-        //Generate the database schema sql script
-        SchemaWriter.write(prop.getProperty("db.dest.schema"), dictionary, System.out);
     }
-        
+    
+    static void execute(Dictionary dictionary, String schema, PrintStream out) {
+        SchemaWriter.write(schema, dictionary, out);
+    }
+
 }

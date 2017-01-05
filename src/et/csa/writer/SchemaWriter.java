@@ -21,6 +21,8 @@ public class SchemaWriter {
     public static void write(String schema, Dictionary dictionary, PrintStream ps) {
         ps.println("CREATE SCHEMA " + schema + ";");
         ps.println();
+        
+        printSystemTables(schema,ps);
 
         for (Record record : dictionary.getRecords()) {
             for (Item item : record.getItems()) {
@@ -106,6 +108,22 @@ public class SchemaWriter {
         for (Item subItem : item.getSubItems()) {
             printValueSet(schema,subItem,ps);
         }
+    }
+    
+    private static void printSystemTables(String schema, PrintStream ps) {
+        ps.println("CREATE TABLE " + schema + ".CSPRO2SQL_LASTUPDATE (");
+        ps.println("    LAST_UPDATE TIMESTAMP NULL DEFAULT NULL");
+        ps.println(") ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;");
+        ps.println();
+        ps.println("CREATE TABLE " + schema + ".CSPRO2SQL_ERRORS (");
+        ps.println("    ID INT(11) NOT NULL AUTO_INCREMENT,");
+        ps.println("    ERROR VARCHAR(2048) NOT NULL,");
+        ps.println("    DATE TIMESTAMP NOT NULL,");
+        ps.println("    CSPRO_GUID BINARY(16) NOT NULL,");
+        ps.println("    QUESTIONNAIRE LONGTEXT NOT NULL,");
+        ps.println("    PRIMARY KEY (ID)");
+        ps.println(") ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;");
+        ps.println();
     }
 
 }

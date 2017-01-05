@@ -4,6 +4,7 @@ package et.csa.writer;
 import et.csa.bean.Dictionary;
 import et.csa.bean.Item;
 import et.csa.bean.Record;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
@@ -13,8 +14,10 @@ public class InsertWriter {
 
     public static void create(String schema, Dictionary dictionary, Map<Record, List<List<String>>> descr, Statement stmt) throws SQLException {
         int id = 0;
+        boolean exists = false;
         for (Map.Entry<Record, List<List<String>>> e : descr.entrySet()) {
             Record record = e.getKey();
+            String selectSql = "select ID from " + schema + "." + record.getTableName() + " where ";
             String sql = "insert into " + schema + "." + record.getTableName() + " (";
             boolean first = true;
             if (!record.isMainRecord()) {
@@ -43,20 +46,46 @@ public class InsertWriter {
                 }
                 sql += ")";
             }
-            
+            if (record.isMainRecord()) {
+                int i=0;
+                first = true;
+                for (Item item : record.getItems()) {
+                    String value = e.getValue().get(0).get(i++);
+                    if (first) first = false;
+                    else selectSql += " AND ";
+                    if (value==null)
+                        selectSql += item.getName() + " is null";
+                    else
+                        selectSql += item.getName() + "='" + value+ "'";
+                }
+                ResultSet executeQuery = stmt.executeQuery(selectSql);
+                exists = executeQuery.next();
+                if (exists) {
+                    id = executeQuery.getInt(1);
+                    continue;
+                }
+            }
+            /*
+            if (exists && !record.isMainRecord()) {
+                System.out.println("delete from " + schema + "." + record.getTableName() +
+                        " where " + record.getMainRecord().getName() + "=" + id);
+            }
             System.out.println(sql);
             if (record.isMainRecord()) {
                 System.out.println("select last_insert_id()");
             }
+            */
             
-            /*
+            if (exists && !record.isMainRecord()) {
+                stmt.executeUpdate("delete from " + schema + "." + record.getTableName() +
+                        " where " + record.getMainRecord().getName() + "=" + id);
+            }
             stmt.executeUpdate(sql);
             if (record.isMainRecord()) {
                 ResultSet lastInsertId = stmt.executeQuery("select last_insert_id()");
                 lastInsertId.next();
                 id = lastInsertId.getInt(1);
             }
-            */
         }
     }
 

@@ -12,7 +12,8 @@ import java.util.Objects;
  */
 public final class Record {
     
-    private String name, tablePrefix;
+    private final String tablePrefix;
+    private String name;
     private String recordTypeValue;
     private boolean required;
     private int max;
@@ -23,8 +24,11 @@ public final class Record {
     private final List<Item> items = new LinkedList<>();
 
     public Record(String tablePrefix) {
-        if (tablePrefix==null) tablePrefix = "";
-        this.tablePrefix = tablePrefix;
+        if (tablePrefix==null || tablePrefix.isEmpty()) {
+            this.tablePrefix = "";
+        } else {
+            this.tablePrefix = tablePrefix + "_";
+        }
     }
 
     public String getName() {

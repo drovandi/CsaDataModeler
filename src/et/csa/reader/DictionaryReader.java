@@ -1,12 +1,14 @@
 
 package et.csa.reader;
 
-import et.csa.SchemaEngine;
 import et.csa.bean.BeanFactory;
 import et.csa.bean.Dictionary;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 
 /**
  * This class reads the CSPro Dictionary
@@ -18,7 +20,11 @@ public class DictionaryReader {
     
     public static Dictionary read(String fileName, String tablePrefix) throws Exception {
         Dictionary dictionary = new Dictionary();
-        try (InputStream in = SchemaEngine.class.getResourceAsStream("/"+fileName)) {
+        boolean isLocalFile = new File(fileName).exists();
+        try (InputStream in =
+                (isLocalFile?
+                    new FileInputStream(fileName):
+                    DictionaryReader.class.getResourceAsStream("/"+fileName))) {
             try (InputStreamReader fr = new InputStreamReader(in)) {
                 try (BufferedReader br = new BufferedReader(fr)) {
                     String line;
